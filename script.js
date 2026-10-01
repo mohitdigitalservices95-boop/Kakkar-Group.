@@ -1,0 +1,12 @@
+const loader=document.getElementById('loader');
+window.addEventListener('load',()=>setTimeout(()=>loader.classList.add('hide'),450));
+const progress=document.getElementById('progress');
+window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-window.innerHeight;progress.style.width=(window.scrollY/h*100)+'%';});
+const menu=document.getElementById('menu'), mobile=document.getElementById('mobileMenu');
+menu.addEventListener('click',()=>mobile.classList.toggle('open'));
+mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobile.classList.remove('open')));
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const glow=document.getElementById('cursorGlow');
+window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';});
+document.getElementById('year').textContent=new Date().getFullYear();
